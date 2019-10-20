@@ -4,29 +4,29 @@ class QuickUnion:
     def __init__(self, number=0):
         self.__components = list(range(number))
 
-    def union(self, p: int, q: int):
-        """Creates union between p and q.
+    def union(self, _p: int, _q: int):
+        """Creates union between _p and _q.
         components[i] is a parent of i"""
 
-        self.__components[self.find_root(p)] = self.find_root(q)
+        self.__components[self.find_root(_p)] = self.find_root(_q)
 
-    def find_root(self, p: int) -> int:
-        """Finds a root of p and returns it.
+    def find_root(self, _p: int) -> int:
+        """Finds a root of _p and returns it.
         Find root is equal to find recursively parent of i,
         which doesn't have a parent"""
 
-        while p != self.__components[p]:
-            p = self.__components[p]
-        return p
+        while _p != self.__components[_p]:
+            _p = self.__components[_p]
+        return _p
 
     def print_list(self):
         """Prints components list without formatting"""
 
         print(self.__components)
 
-    def connected(self, p: int, q: int) -> bool:
-        """Checks, whether p and q are in one union or not"""
-        if self.find_root(p) == self.find_root(q):
+    def connected(self, _p: int, _q: int) -> bool:
+        """Checks, whether _p and _q are in one union or not"""
+        if self.find_root(_p) == self.find_root(_q):
             return True
         return False
 
@@ -43,15 +43,11 @@ def input_from_file(filename: str) -> [str]:
 
 
 def main():
-    """Initializes program and run it"""
+    """Example of using QuickUnion"""
 
     lines = input_from_file("input.txt")
 
-    # print(lines)
-
     _qu = QuickUnion(10)
-    # print(_qu.find_root(2))
-    # print(_qu.connected(2, 2))
 
     for line in lines:
         _qu.union(int(line[0]), int(line[1]))
